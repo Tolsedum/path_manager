@@ -38,11 +38,13 @@
 #include <boost/algorithm/string.hpp>
 #include <iostream>
 #include <filesystem>
+#include <map>
 
 namespace managers{
     class PathManager{
         std::string root_path_;
         std::string path_;
+        // std::map<std::string, std::string> paths_;
 
         void initPath(std::string root_path);
         std::string getParentDir(const std::string_view dir);
@@ -50,12 +52,14 @@ namespace managers{
     public:
 
         PathManager(char *argv[]);
+        PathManager(std::string arg);
         PathManager(){
             initPath(std::filesystem::current_path().string());
         };
         ~PathManager(){};
 
         void initByPath(std::string_view path);
+        void setCurrentPath(std::string new_path);
         std::string_view getCurrentPath(){return path_;};
         std::string_view getRootPath(){return root_path_;};
         std::string getRootFielPath(std::string name_file);

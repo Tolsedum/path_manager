@@ -1,8 +1,10 @@
 #include "managers/PathManager.hpp"
 
 int main(int argc, char *argv[]){
-    managers::PathManager manager;
-    manager.initByPath(argv[0]);
+    managers::PathManager manager(
+        "/media/tolsedum/user/IT/progects/server/output/server/run"
+    );
+    // manager.initByPath();
     std::cout 
         << "root path: " << manager.getRootPath() 
         << std::endl
