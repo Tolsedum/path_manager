@@ -45,7 +45,6 @@ namespace managers{
         std::string path_;
 
         void initPath(std::string root_path);
-
         std::string getParentDir(const std::string_view dir);
         std::string trim(std::string str, char pattern);
     public:
@@ -56,6 +55,7 @@ namespace managers{
         };
         ~PathManager(){};
 
+        void initByPath(std::string_view path);
         std::string_view getCurrentPath(){return path_;};
         std::string_view getRootPath(){return root_path_;};
         std::string getRootFielPath(std::string name_file);

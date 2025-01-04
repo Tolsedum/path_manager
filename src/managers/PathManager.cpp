@@ -2,15 +2,18 @@
 
 managers::PathManager::PathManager(char *argv[]){
     initPath(std::filesystem::current_path().string());
-    
-    path_ = getParentDir(argv[0]);
-    if(path_.size() > 2)
-        path_ = path_.substr(2, path_.size());
+    initByPath(argv[0]);
 }
 
 void managers::PathManager::initPath(std::string root_path){
     root_path_ = root_path;
     path_ = "";
+}
+
+void managers::PathManager::initByPath(std::string_view path){
+    path_ = getParentDir(path);
+    if(path_.size() > 2)
+        path_ = path_.substr(2, path_.size());
 }
 
 std::string managers::PathManager::getParentDir(const std::string_view dir){

@@ -1,7 +1,8 @@
 #include "managers/PathManager.hpp"
 
 int main(int argc, char *argv[]){
-    managers::PathManager manager(argv);
+    managers::PathManager manager;
+    manager.initByPath(argv[0]);
     std::cout 
         << "root path: " << manager.getRootPath() 
         << std::endl
