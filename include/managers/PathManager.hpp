@@ -1,7 +1,7 @@
 #ifndef PATH_MANAGER_HPP
 #define PATH_MANAGER_HPP
 
-/** Version 1 */
+/** Version 2.0 */
 
 /**
  *  __________________________________________
@@ -42,28 +42,33 @@
 
 namespace managers{
     class PathManager{
+        /** @brief Old working directory */
+        std::string old_root_path_;
+        /** @brief The program's working directory */
         std::string root_path_;
-        std::string path_;
-        // std::map<std::string, std::string> paths_;
+        /** @brief The directory is relative to the main one (root_path_/relative_path_) */
+        std::string relative_path_;
 
-        void initPath(std::string root_path);
-        std::string getParentDir(const std::string_view dir);
-        std::string trim(std::string str, char pattern);
+        bool changeCurrentDir(std::string_view dir);
+
     public:
-
-        PathManager(char *argv[]);
-        PathManager(std::string arg);
-        PathManager(){
-            initPath(std::filesystem::current_path().string());
-        };
+        PathManager(std::string_view root, std::string_view relative)
+            {initPath(root, relative);};
+        PathManager(){};
         ~PathManager(){};
 
-        void initByPath(std::string_view path);
-        void setCurrentPath(std::string new_path);
-        std::string_view getCurrentPath(){return path_;};
-        std::string_view getRootPath(){return root_path_;};
-        std::string getRootFielPath(std::string name_file);
-        std::string getFielPath(std::string name_file);
+        void initPath(
+            std::string_view root, 
+            std::string_view relative = ""
+        );
+
+        bool changeRootDir();
+        bool bakToOldRootDir();
+
+        std::string getFielPath(std::string_view file_name);
+        
+        std::string getRootPath(){return root_path_;};
+        std::string getRelativePath(){return relative_path_;};
     };
 }
 
